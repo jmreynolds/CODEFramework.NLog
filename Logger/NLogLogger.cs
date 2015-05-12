@@ -8,7 +8,7 @@ namespace LoggingLibrary
     public class NLogLogger : ILogger, INLogger
     {
 
-        private static Logger _logger = LogManager.GetCurrentClassLogger();
+        private Logger _logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Implementation of CODE Framework Logging Mediator for use with NLog
@@ -61,6 +61,50 @@ namespace LoggingLibrary
 
 
 
+    }
+
+    public class NLogExceptionLogger : IExceptionLogger, INLogger
+    {
+        private Logger _logger = LogManager.GetCurrentClassLogger();
+        public void Log(Exception exception, LogEventType type)
+        {
+            Log(exception.Message,exception, type);
+        }
+        public void Log(string leadingText, Exception exception, LogEventType type)
+        {
+            switch (type)
+            {
+                case LogEventType.Undefined:
+                    _logger.InfoException(leadingText, exception);
+                    break;
+                case LogEventType.Information:
+                    _logger.InfoException(leadingText, exception);
+                    break;
+                case LogEventType.Warning:
+                    _logger.WarnException(leadingText, exception);
+                    break;
+                case LogEventType.Exception:
+                    _logger.FatalException(leadingText, exception);
+                    break;
+                case LogEventType.Error:
+                    _logger.ErrorException(leadingText, exception);
+                    break;
+                case LogEventType.Critical:
+                    _logger.FatalException(leadingText, exception);
+                    break;
+                case LogEventType.Success:
+                    _logger.InfoException(leadingText, exception);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void Log(NLogEntry entry)
+        {
+            _logger = LogManager.GetLogger(entry.Source);
+            Log(entry.Message, entry.Exception, entry.Severity.Convert());
+        }
     }
 
     public interface INLogger
