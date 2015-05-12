@@ -1,7 +1,7 @@
 # CODEFramework.NLog
-I was using CODEFramework in a project, and I really like the LoggingMediator. Particularly the fact that it displays the errors in Development service host when you're using that feature. However, I wasn't particularly happy with the built in output methods. I really like NLog, but I don't like having the GetCurrentClassLogger call scattered throughout my code.
+I was using [CODEFramework](http://codeframework.codeplex.com/) in a project, and I really like the [LoggingMediator](http://codeframework.codeplex.com/wikipage?title=Logging%20Framework). Particularly the fact that it displays the errors in Development service host when you're using that feature. However, I wasn't particularly happy with the built in output methods. I really like [NLog](http://nlog-project.org/), but I don't like having the GetCurrentClassLogger call scattered throughout my code.
 
-There are several great solutions for the NLog problem - for instance NLog.Interface or Common.Logger. But, I wanted to use LoggingMediator with NLog.
+There are several great solutions for the NLog problem - for instance [NLog.Interface](https://www.nuget.org/packages/NLog.Interface/) or [Common.Logging](https://www.nuget.org/packages/Common.Logging/). But, I wanted to use LoggingMediator with NLog.
 
 So, here is the CODEFramework.NLog plugin.
 
